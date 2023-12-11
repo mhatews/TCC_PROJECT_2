@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div class="card mt-5">
+    <div class="card-title mx-2">
+        <div class="row">
+          <div class="col-6">
+            <h3>Clientes</h3>
+            <a href="{% url 'create_categorias' %}"><button class="btn btn-primary">Cadastrar Categoria <img src="#"> </button></a>
+          </div>
+          <div class="col-6" style="margin-top: 1cm; padding-left: 9cm;">
+            <a href="{% url 'home' %}"><button class="btn btn-secondary"><img src="#"> Voltar</button></a>
+          </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for categoria in object_list %}
+                  <tr>
+                    <th scope="row">{{categoria.id}}</th>
+                    <td>{{categoria.nome}}</td>
+                    <td><a href="{% url 'edit_categorias' categoria.id %}"><button class="btn btn-secondary"><img src="#">  Editar</button></a></td>
+                    <td><a href="{% url 'delete_categorias' categoria.id %}"><button class="btn btn-danger"><img src="#">  Deletar</button></a></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

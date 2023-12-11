@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+
+
+{% block main %}
+
+
+    <div style="margin-top: 7cm;">
+        <h1 style="color: whitesmoke;">Olá {{usuario.empregado.nome}}</h1>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-center border-secondary" style="height: 6cm;">
+                    <div class="card-body">
+                        <img src="static/icons/person-fill2.svg" alt=""> Pessoas<p></p>
+                        <a href="{% url 'list_clientes'%}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Clientes</button></a>
+                        <a href="{% url 'list_empregados' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Funcinários</button></a>
+                        <a href="{% url 'list_fornecedores' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Fornecedores</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-center border-secondary" style="height: 6cm;">
+                    <div class="card-body">
+                        <img src="static/icons/boxes.svg" alt=""> Produtos<p></p>
+                        <a href="{% url 'list_produtos' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Estoque</button></a>
+                        <a href="{% url 'list_categorias' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Categorias</button></a>
+                        <a href="{% url 'list_vendas' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Vendas</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center border-secondary" style="height: 6cm;">
+                    <div class="card-body">
+                        <img src="static/icons/gear-fill.svg" alt=""> Serviços<p></p>
+                        <a href="{% url 'list_servicos' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Meus Serviços</button></a>
+                        <a href="#"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Ordens de Serviço</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card text-center border-secondary" style="height: 6cm;">
+                    <div class="card-body">
+                        <img src="static/icons/bar-chart-fill.svg" alt=""> Relatórios<p></p>
+                        <!-- <button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Vendas/Serviços</button> -->
+                        <a href="{% url 'financeiro' %}"><button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Financeiro</button></a>
+                    <!--<button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Contas a receber</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 1cm;">
+            <div class="col-md-9"></div>
+        <!--
+            <div class="col-md-1">
+                <a href="#"><img src="static/icons/calendar-event-fill.svg" height="55" width="100%" style="margin: 10px;"></a>
+            </div>
+        -->
+            <div class="col-md-1">
+                <a href="{% url 'edit_empresa' usuario.empregado.empresa.id %}"><img src="static/icons/person-fill.svg" height="55" width="100%" style="margin: 10px;"></a>
+            </div>
+            <div class="col-md-1">
+                <a href="{%url 'logout'%}"><img src="static/icons/box-arrow-left.svg" height="55" width="100%" style="margin: 10px;"></a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

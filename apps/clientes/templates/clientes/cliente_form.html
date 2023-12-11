@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+
+
+
+{%block main%}
+{% load bootstrap %}
+<div class="card">
+    <h1>Criar Novo Cliente</h1>
+    <div class="card-body">
+        <form method="post">
+
+            {% csrf_token %}
+            {{form|bootstrap}}
+            
+
+            <br><button type="submit" class="btn btn-primary">Confirmar</button>
+            <a href="{% url 'list_clientes' %}"><button type="button" class="btn btn-secondary">Cancelar </button></a>
+        </form>
+    </div>
+</div>
+
+
+{%endblock%}

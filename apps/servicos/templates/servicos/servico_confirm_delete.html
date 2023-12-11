@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+
+{% block title%} Cliente Produtos {% endblock %}
+
+{%block main%}
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <h3>Você tem certeza que deseja deletar o {{cliente.nome}}</h3>
+            {{form}}
+            
+            <button type="submit" class="btn btn-danger">Confirmar</button>
+            <a href="{% url 'list_clientes' %}"><button type="button" class="btn btn-secondary">Cancelear</button></a>
+            
+        </form>
+    </div>
+</div>
+
+
+{%endblock%}

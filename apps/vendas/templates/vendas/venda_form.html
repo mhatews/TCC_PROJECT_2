@@ -1,0 +1,40 @@
+{%extends 'base.html'%}
+
+
+
+{%block main%}
+{% load bootstrap %}
+<div class="card">
+    <h1>Nova Venda</h1>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{ form|bootstrap}}
+            {{ formset.management_form }}  
+
+            <table>
+                    <tbody>
+                        {% for form in formset %}
+                            <tr><div class="inlineform">{{ form|bootstrap}}</div></tr>
+                        {% endfor %}
+                    </tbody>
+            </table>
+
+            <br><button type="submit" class="btn btn-primary">Confirmar</button>
+            <a href="{% url 'list_vendas' %}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
+        </form>
+    </div>
+</div>
+{%endblock%}
+
+{%block scripts%}
+<script type="text/javascript">
+    $(function() {
+        $('.inlineform').formset({
+            prefix: '{{ formset.prefix }}',
+            addText: '+ Adicionar Produto',
+            deleteText: 'Remover Produto',
+        });
+    })
+</script>
+{%endblock scripts%}
