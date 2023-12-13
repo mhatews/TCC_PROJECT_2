@@ -17,7 +17,7 @@ class ProdutoList(ListView):
 class ProdutoCreate(CreateView):
     model = Produto
     template_name = 'produtos/produto_form.html'
-    form_class = ProdutosForm
+    fields = ['nome', 'categoria','valor_unitario']
     success_url = reverse_lazy('list_produtos')
 
     def form_valid(self, form):
@@ -26,10 +26,10 @@ class ProdutoCreate(CreateView):
       produto.save()
       return super(ProdutoCreate, self).form_valid(form)
     
-    def get_form_kwargs(self):
+    '''def get_form_kwargs(self):
        kwargs = super(ProdutoCreate, self).get_form_kwargs()
        kwargs.update({'user': self.request.user})
-       return kwargs
+       return kwargs'''
     
     
 class ProdutoUpdate(UpdateView):
