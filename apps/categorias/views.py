@@ -21,7 +21,7 @@ class CategoriaCreate(CreateView):
     def form_valid(self, form):
       categoria  =  form.save(commit=False)
       categoria.empresa = self.request.user.empregado.empresa
-      categoria.user = self.request.user.pk
+      categoria.user = self.request.user.id
       categoria.save()
       return super(CategoriaCreate, self).form_valid(form)
     
