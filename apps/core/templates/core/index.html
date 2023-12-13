@@ -33,7 +33,7 @@
                     <div class="card-body">
                         <img src="static/icons/gear-fill.svg" alt=""> Serviços<p></p>
                         <a href="{% url 'list_servicos' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Meus Serviços</button></a>
-                        <a href="#"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Ordens de Serviço</button></a>
+                        <a href="{% url 'list_ordens' %}"><button class="btn btn-primary"style="margin-top: 4px; width: 100%;">Ordens de Serviço</button></a>
                     </div>
                 </div>
             </div>
@@ -41,10 +41,9 @@
             <div class="col-md-3">
                 <div class="card text-center border-secondary" style="height: 6cm;">
                     <div class="card-body">
-                        <img src="static/icons/bar-chart-fill.svg" alt=""> Relatórios<p></p>
-                        <!-- <button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Vendas/Serviços</button> -->
-                        <a href="{% url 'financeiro' %}"><button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Financeiro</button></a>
-                    <!--<button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Contas a receber</button>-->
+                        <img src="static/icons/bar-chart-fill.svg" alt=""> Financeiro<p></p>
+                        <a href="{% url 'financeiro' %}"><button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Vendas</button></a>
+                        <a href="{% url 'financeiro_ordens' %}"><button class="btn btn-primary"style="margin-top: 3px; width: 100%;">Serviços</button></a>
                     </div>
                 </div>
             </div>

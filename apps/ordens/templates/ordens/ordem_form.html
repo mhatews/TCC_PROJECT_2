@@ -4,7 +4,7 @@
   {% load bootstrap %}
 
   <div class="card">
-    <h1>Nova Venda</h1>
+    <h1>Nova Ordem de Serviço</h1>
     <div class="card-body">
       <form method="post">
         {% csrf_token %}
@@ -16,7 +16,7 @@
         <table class="table table-bordered" id="{{ formset.prefix }}-table">
           <thead>
             <tr>
-              <th>Produto</th>
+              <th>Serviço</th>
               <th>Quantidade</th>
               <th>Ações</th>
             </tr>
@@ -24,7 +24,7 @@
           <tbody>
             {% for form in formset %}
               <tr>
-                <td>{{ form.produto|bootstrap }}</td>
+                <td>{{ form.servico|bootstrap }}</td>
                 <td>{{ form.quantidade|bootstrap }}</td>
                 <td>
                 </td>
@@ -34,7 +34,7 @@
         </table>
 
         <button type="submit" class="btn btn-primary">Confirmar</button>
-        <a href="{% url 'list_vendas' %}" class="btn btn-secondary">Cancelar</a>
+        <a href="{% url 'list_ordens' %}" class="btn btn-secondary">Cancelar</a>
       </form>
     </div>
   </div>
@@ -45,8 +45,8 @@
     $(function () {
       $('#{{ formset.prefix }}-table tbody tr').formset({
         prefix: '{{ formset.prefix }}',
-        addText: '+ Adicionar Produto',
-        deleteText: 'Remover Produto',
+        addText: '+ Adicionar Serviço',
+        deleteText: 'Remover Serviço',
         addCssClass: 'btn btn-success btn-sm',
         deleteCssClass: 'btn btn-danger btn-sm',
       });

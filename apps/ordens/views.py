@@ -2,33 +2,32 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Venda, ItemVenda
-from .forms import ItemVendaFormSet, ItemVendaUpdateFormSet
+from .models import Ordem, ItemOrdem
+from .forms import ItemOrdemFormSet, ItemOrdemUpdateFormSet
 from django.db.models import Sum
-from .signals import calcular_valor_total
 
 
-class VendaList(ListView):
-    models = Venda
+class OrdemList(ListView):
+    models = Ordem
 
     def get_queryset(self):
       empresa_logada = self.request.user.empregado.empresa
-      queryset = Venda.objects.filter(empresa=empresa_logada)
+      queryset = Ordem.objects.filter(empresa=empresa_logada)
       return queryset
     
 
-class VendaCreate(CreateView):
-    model = Venda
-    template_name = 'vendas/venda_form.html'
-    fields = ['cliente', 'data','status']
-    success_url = reverse_lazy('list_vendas')
+class OrdemCreate(CreateView):
+    model = Ordem
+    template_name = 'ordens/ordem_form.html'
+    fields = ['cliente', 'data', 'status']
+    success_url = reverse_lazy('list_ordens')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['formset'] = ItemVendaFormSet(self.request.POST)
+            data['formset'] = ItemOrdemFormSet(self.request.POST)
         else:
-            data['formset'] = ItemVendaFormSet()
+            data['formset'] = ItemOrdemFormSet()
         return data
 
     def form_valid(self, form):
@@ -46,25 +45,25 @@ class VendaCreate(CreateView):
         if formset.is_valid():
             for form in formset:
                 item = form.save(commit=False)
-                item.venda = self.object
+                item.ordem = self.object
                 item.save()
 
         self.object.calcular_valor_total()
 
-        return super(VendaCreate, self).form_valid(form)
+        return super(OrdemCreate, self).form_valid(form)
     
-class VendaUpdate(UpdateView):
-    model = Venda
-    template_name = 'vendas/venda_form.html'
+class OrdemUpdate(UpdateView):
+    model = Ordem
+    template_name = 'ordens/ordem_form.html'
     fields = ['cliente', 'data', 'status']
-    success_url = reverse_lazy('list_vendas')
+    success_url = reverse_lazy('list_ordens')
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['formset'] = ItemVendaUpdateFormSet(self.request.POST, instance=self.object)
+            data['formset'] = ItemOrdemUpdateFormSet(self.request.POST, instance=self.object)
         else:
-            data['formset'] = ItemVendaUpdateFormSet(instance=self.object)
+            data['formset'] = ItemOrdemUpdateFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
@@ -76,33 +75,30 @@ class VendaUpdate(UpdateView):
         self.object.empresa = self.request.user.empregado.empresa
         self.object.save()
 
+
+        # Associe instâncias relacionadas à instância principal
         if formset.is_valid():
             for form in formset:
                 item = form.save(commit=False)
-                item.venda = self.object
+                item.ordem = self.object
                 item.save()
 
         self.object.calcular_valor_total()
 
-        return super(VendaUpdate, self).form_valid(form)
+        return super(OrdemUpdate, self).form_valid(form)
     
 
-class VendaDelete(DeleteView):
-   model = Venda
-   success_url = reverse_lazy('list_vendas')
+class OrdemDelete(DeleteView):
+   model = Ordem
+   success_url = reverse_lazy('list_ordens')
 
-
-from django.db.models import Sum
-from django.views.generic import ListView
-from .models import Venda, ItemVenda
-
-class VendaListFinanceiro(ListView):
-    model = Venda
-    template_name = 'vendas/financeiro_list.html'
+class OrdemListFinanceiro(ListView):
+    model = Ordem
+    template_name = 'ordens/financeiro_ordens.html'
 
     def get_queryset(self):
         empresa_logada = self.request.user.empregado.empresa
-        queryset = Venda.objects.filter(empresa=empresa_logada)
+        queryset = Ordem.objects.filter(empresa=empresa_logada)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -110,7 +106,7 @@ class VendaListFinanceiro(ListView):
         empresa_logada = self.request.user.empregado.empresa
 
         # Calcule o total de vendas a receber
-        total_a_receber = Venda.objects.filter(
+        total_a_receber = Ordem.objects.filter(
             empresa=empresa_logada,
             status__nome='A RECEBER',
             data_recebimento__isnull=True  # Apenas vendas não pagas
@@ -118,3 +114,5 @@ class VendaListFinanceiro(ListView):
 
         context['total_a_receber'] = total_a_receber
         return context
+
+

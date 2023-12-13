@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.categorias',
     'apps.core',
     'apps.servicos',
+    'apps.ordens',
 
 
     'bootstrapform',

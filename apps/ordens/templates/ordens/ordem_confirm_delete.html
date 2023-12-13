@@ -1,6 +1,6 @@
 {%extends 'base.html'%}
 
-{% block title%} Clientes {% endblock %}
+{% block title%} Ordens de Serviços{% endblock %}
 
 {%block main%}
 
@@ -8,11 +8,11 @@
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
-            <h3>Você tem certeza que deseja deletar o {{cliente.nome}}</h3>
+            <h3>Você tem certeza que deseja deletar o {{ordem.cliente.nome}}</h3>
             {{form}}
             
             <button type="submit" class="btn btn-danger">Confirmar</button>
-            <a href="{% url 'list_clientes' %}"><button type="button" class="btn btn-secondary">Cancelear</button></a>
+            <a href="{% url 'list_ordens' %}"><button type="button" class="btn btn-secondary">Cancelar</button></a>
             
         </form>
     </div>

@@ -6,7 +6,7 @@
     <div class="card-title mx-2">
         <div class="row">
           <div class="col-6">
-            <h3>Vendas a receber</h3>
+            <h3>Ordens de Serviço a receber</h3>
           </div>
           <div class="col-6" style="margin-top: 1cm; padding-left: 9cm;">
             <a href="{% url 'home' %}"><button class="btn btn-secondary"><img src="static/icons/arrow-left-circle-fill.svg"> Voltar</button></a>
@@ -14,26 +14,26 @@
         </div>
     </div>
     <div class="card-body">
-        <h2>Total de Vendas a Receber: R$ {{ total_a_receber }}</h2>
+        <h2>Total de Serviços a Receber: R$ {{ total_a_receber }}</h2>
 
         <table class="table mt-3">
           <thead>
             <tr>
-              <th>ID da Venda</th>
+              <th>ID da Ordem</th>
               <th>Nome do Cliente</th>
               <th>Valor Total</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
-            {% for venda in object_list %}
-              {% if venda.status.nome == 'A RECEBER' %}
+            {% for ordem in object_list %}
+              {% if ordem.status.nome == 'A RECEBER' %}
                 <tr>
-                  <td>{{ venda.id }}</td>
-                  <td>{{ venda.cliente }}</td>
-                  <td>R$ {{ venda.valor_total }}</td>
+                  <td>{{ ordem.id }}</td>
+                  <td>{{ ordem.cliente }}</td>
+                  <td>R$ {{ ordem.valor_total }}</td>
                   <td>
-                    <a href="{% url 'delete_vendas' venda.id %}" class="btn btn-danger btn-sm">Dar Baixa</a>
+                    <a href="{% url 'delete_ordens' ordem.id %}" class="btn btn-danger btn-sm">Dar Baixa</a>
                   </td>
                 </tr>
               {% endif %}
