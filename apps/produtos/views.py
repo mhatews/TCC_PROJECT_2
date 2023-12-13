@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Produto
+from .forms import ProdutosForm
 
 class ProdutoList(ListView):
     model = Produto
@@ -16,7 +17,7 @@ class ProdutoList(ListView):
 class ProdutoCreate(CreateView):
     model = Produto
     template_name = 'produtos/produto_form.html'
-    fields = ['nome', 'categoria','valor_unitario']
+    form_class = ProdutosForm
     success_url = reverse_lazy('list_produtos')
 
     def form_valid(self, form):
@@ -24,6 +25,11 @@ class ProdutoCreate(CreateView):
       produto.empresa = self.request.user.empregado.empresa
       produto.save()
       return super(ProdutoCreate, self).form_valid(form)
+    
+    def get_form_kwargs(self):
+       kwargs = super(ProdutoCreate, self).get_form_kwargs()
+       kwargs.update({'user': self.request.user})
+       return kwargs
     
     
 class ProdutoUpdate(UpdateView):
