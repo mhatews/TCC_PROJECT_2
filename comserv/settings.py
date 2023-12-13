@@ -162,4 +162,4 @@ LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'login'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-1101.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-a9ed.up.railway.app']
