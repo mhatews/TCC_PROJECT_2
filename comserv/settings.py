@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+DATABASE_URL = 'postgresql://postgres:DB*2fe-ECDee4bg2cA-C1e*c61BCgFg*@roundhouse.proxy.rlwy.net:30179/railway'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
