@@ -7,10 +7,10 @@
         <div class="row">
           <div class="col-6">
             <h3>Produtos</h3>
-            <a href="{% url 'create_produtos' %}"><button class="btn btn-primary">Cadastrar Produto <img src="#"> </button></a>
+            <a href="{% url 'create_produtos' %}"><button class="btn btn-primary">Cadastrar Produto  </button></a>
           </div>
           <div class="col-6" style="margin-top: 1cm; padding-left: 9cm;">
-            <a href="{% url 'home' %}"><button class="btn btn-secondary"><img src="#"> Voltar</button></a>
+            <a href="{% url 'home' %}"><button class="btn btn-secondary"> Voltar</button></a>
           </div>
         </div>
     </div>
@@ -32,8 +32,8 @@
                     <th scope="row">{{produto.id}}</th>
                     <td>{{produto.nome}}</td>
                     <td>R$ {{produto.valor_unitario}}</td>
-                    <td><a href="{% url 'update_produtos' produto.id %}"><button class="btn btn-secondary"><img src="#">  Editar</button></a></td>
-                    <td><a href="{% url 'delete_produtos' produto.id %}"><button class="btn btn-danger"><img src="#">  Deletar</button></a></td>
+                    <td><a href="{% url 'update_produtos' produto.id %}"><button class="btn btn-secondary">  Editar</button></a></td>
+                    <td><a href="{% url 'delete_produtos' produto.id %}"><button class="btn btn-danger">  Deletar</button></a></td>
                   </tr>
                   {% endfor %}
                 </tbody>

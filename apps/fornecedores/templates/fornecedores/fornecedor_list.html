@@ -6,11 +6,11 @@
     <div class="card-title mx-2">
         <div class="row">
           <div class="col-6">
-            <h3>Clientes</h3>
-            <a href="{% url 'create_fornecedores' %}"><button class="btn btn-primary">Cadastrar Fornecedor <img src="#"> </button></a>
+            <h3>Fornecedores</h3>
+            <a href="{% url 'create_fornecedores' %}"><button class="btn btn-primary">Cadastrar Fornecedor</button></a>
           </div>
           <div class="col-6" style="margin-top: 1cm; padding-left: 9cm;">
-            <a href="{% url 'home' %}"><button class="btn btn-secondary"><img src="#"> Voltar</button></a>
+            <a href="{% url 'home' %}"><button class="btn btn-secondary">Voltar</button></a>
           </div>
         </div>
     </div>
@@ -34,8 +34,8 @@
                     <td>{{fornecedor.nome}}</td>
                     <td>{{fornecedor.telefone}}</td>
                     <td>{{fornecedor.email}}</td>
-                    <td><a href="{% url 'update_fornecedores' fornecedor.id %}"><button class="btn btn-secondary"><img src="#">  Editar</button></a></td>
-                    <td><a href="{% url 'delete_fornecedores' fornecedor.id %}"><button class="btn btn-danger"><img src="#">  Deletar</button></a></td>
+                    <td><a href="{% url 'update_fornecedores' fornecedor.id %}"><button class="btn btn-secondary">  Editar</button></a></td>
+                    <td><a href="{% url 'delete_fornecedores' fornecedor.id %}"><button class="btn btn-danger">  Deletar</button></a></td>
                   </tr>
                   {% endfor %}
                 </tbody>

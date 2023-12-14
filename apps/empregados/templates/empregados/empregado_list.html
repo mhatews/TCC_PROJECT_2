@@ -9,10 +9,10 @@
         <div class="row">
           <div class="col-6">
             <h3>Funcionários</h3>
-            <a href="{% url 'create_empregados' %}"><button class="btn btn-primary">Cadastrar Funionário <img src="#"> </button></a>
+            <a href="{% url 'create_empregados' %}"><button class="btn btn-primary">Cadastrar Funionário </button></a>
           </div>
           <div class="col-6" style="margin-top: 1cm; padding-left: 9cm;">
-            <a href="{% url 'home' %}"><button class="btn btn-secondary"><img src="#"> Voltar</button></a>
+            <a href="{% url 'home' %}"><button class="btn btn-secondary"> Voltar</button></a>
           </div>
         </div>
     </div>
@@ -32,8 +32,8 @@
                   <tr>
                     <th scope="row">{{empregado.id}}</th>
                     <td>{{empregado.nome}}</td>
-                    <td><a href="{% url 'edit_empregados' empregado.id %}"><button class="btn btn-secondary"><img src="#">  Editar</button></a></td>
-                    <td><a href="{% url 'delete_empregados' empregado.id %}"><button class="btn btn-danger"><img src="#">  Deletar</button></a></td>
+                    <td><a href="{% url 'edit_empregados' empregado.id %}"><button class="btn btn-secondary">  Editar</button></a></td>
+                    <td><a href="{% url 'delete_empregados' empregado.id %}"><button class="btn btn-danger"> Deletar</button></a></td>
                   </tr>
                   {% endfor %}
                 </tbody>
