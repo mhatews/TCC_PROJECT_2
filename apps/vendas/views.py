@@ -68,23 +68,23 @@ class VendaUpdate(UpdateView):
         return data
 
     def form_valid(self, form):
+        venda = form.save(commit=False)
+        venda.empresa = self.request.user.empregado.empresa
+        venda.save()
         context = self.get_context_data()
         formset = context['formset']
-
-        # Salve a instância principal
-        self.object = form.save(commit=False)
-        self.object.empresa = self.request.user.empregado.empresa
-        self.object.save()
-
         if formset.is_valid():
-            for form in formset:
-                item = form.save(commit=False)
-                item.venda = self.object
-                item.save()
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
 
-        self.object.calcular_valor_total()
+            self.object.calcular_valor_total()
+            return super(VendaUpdate, self).form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+        
 
-        return super(VendaUpdate, self).form_valid(form)
     
 
 class VendaDelete(DeleteView):
