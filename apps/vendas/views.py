@@ -62,29 +62,29 @@ class VendaUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data['formset'] = ItemVendaUpdateFormSet(self.request.POST, instance=self.object)
+            data['formset'] = ItemVendaFormSet(self.request.POST, instance=self.object)
         else:
-            data['formset'] = ItemVendaUpdateFormSet(instance=self.object)
+            data['formset'] = ItemVendaFormSet(instance=self.object)
         return data
 
     def form_valid(self, form):
-        venda = form.save(commit=False)
-        venda.empresa = self.request.user.empregado.empresa
-        venda.save()
         context = self.get_context_data()
         formset = context['formset']
+
+        # Salve a instância principal
+        self.object = form.save(commit=False)
+        self.object.empresa = self.request.user.empregado.empresa
+        self.object.save()
+
         if formset.is_valid():
-            self.object = form.save()
-            formset.instance = self.object
-            formset.save()
+            for form in formset:
+                item = form.save(commit=False)
+                item.venda = self.object
+                item.save()
 
-            self.object.calcular_valor_total()
-            return super(VendaUpdate, self).form_valid(form)
-        else:
-            return self.form_invalid(form)
-        
-        
+        self.object.calcular_valor_total()
 
+        return super(VendaUpdate, self).form_valid(form)
     
 
 class VendaDelete(DeleteView):
